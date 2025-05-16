@@ -1,103 +1,131 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from 'react';
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  Box,
+  Paper,
+  Grid,
+  Link,
+  InputAdornment,
+} from '@mui/material';
+import { Email, Lock } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  // ค่า email และ password ที่ถูกต้อง
+  const correctEmail = 'admin@example.com';
+  const correctPassword = '12345678'; // 8 ตัวอักษร
+
+  // ตรวจสอบว่าฟอร์มถูกกรอกครบและถูกต้องหรือยัง
+  const isFormValid = email !== '' && password !== '' && password.length <= 8;
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // ตรวจสอบความยาวรหัสผ่าน
+    if (password.length > 8) {
+      setError('ລະຫັດຜ່ານຕ້ອງບໍ່ເກິນ 8 ອັກສອນ');
+      return;
+    }
+
+    // ตรวจสอบข้อมูล login
+    if (email !== correctEmail || password !== correctPassword) {
+      setError('ອິເມວ ຫຼື ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ');
+      return;
+    }
+
+    // Login สำเร็จ
+    console.log('Login success!');
+    router.push('/Dashboard');
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    <Container maxWidth="sm">
+      <Box height="100vh" display="flex" alignItems="center" justifyContent="center">
+        <Paper elevation={3} sx={{ padding: 4, width: '100%' }}>
+          <Typography variant="h4" align="center" gutterBottom color="primary">
+            Login
+          </Typography>
+          <form onSubmit={handleLogin}>
+            <TextField
+              label="Email"
+              fullWidth
+              required
+              margin="normal"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError('');
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Email color="primary" />
+                  </InputAdornment>
+                ),
+              }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <TextField
+              label="Password"
+              type="password"
+              fullWidth
+              required
+              margin="normal"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError('');
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Lock color="primary" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            {error && (
+              <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+                {error}
+              </Typography>
+            )}
+
+            <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
+              <div>
+                <Link href="/forgot-password" variant="body2">
+                  Forgot Password?
+                </Link>
+              </div>
+              <div>
+                <Link href="/register" variant="body2">
+                  Create Account
+                </Link>
+              </div>
+            </Grid>
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ mt: 3 }}
+              disabled={!isFormValid} // 🔒 ปิดปุ่มหากฟอร์มไม่พร้อม
+            >
+              Login
+            </Button>
+          </form>
+        </Paper>
+      </Box>
+    </Container>
   );
 }
