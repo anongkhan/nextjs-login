@@ -8,7 +8,20 @@ import {
   Box,
   AppBar,
   Toolbar,
+  CssBaseline,
+  Paper,
 } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { styled } from '@mui/material/styles';
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4),
+  marginTop: theme.spacing(6),
+  textAlign: 'center',
+  backgroundColor: theme.palette.background.default,
+  boxShadow: theme.shadows[3],
+  borderRadius: theme.shape.borderRadius * 2,
+}));
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -19,24 +32,34 @@ export default function DashboardPage() {
   };
 
   return (
-    <Container maxWidth="md">
-      <AppBar position="static">
+    <>
+      <CssBaseline />
+      <AppBar position="static" color="primary" enableColorOnDark>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6">Dashboard</Typography>
-          <Button color="inherit" onClick={handleLogout}>
+          <Typography variant="h6" component="div">
+            🎉 Dashboard
+          </Typography>
+          <Button
+            color="inherit"
+            startIcon={<LogoutIcon />}
+            onClick={handleLogout}
+            sx={{ textTransform: 'none' }}
+          >
             Logout
           </Button>
         </Toolbar>
       </AppBar>
 
-      <Box mt={4} textAlign="center">
-        <Typography variant="h4" gutterBottom>
-          ຍິນດີຕ້ອນຮັບເຂົ້າສູ່ 
-        </Typography>
-        <Typography variant="body1">
-          ເຂົ້າສູ່ລະບົບສຳເລັດ!
-        </Typography>
-      </Box>
-    </Container>
+      <Container maxWidth="sm">
+        <StyledPaper>
+          <Typography variant="h4" gutterBottom fontWeight={600} color="primary">
+            ຍິນດີຕ້ອນຮັບ
+          </Typography>
+          <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
+            ເຂົ້າສູ່ລະບົບສຳເລັດ!
+          </Typography>
+        </StyledPaper>
+      </Container>
+    </>
   );
 }

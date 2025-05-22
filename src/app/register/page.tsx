@@ -36,12 +36,24 @@ export default function RegisterPage() {
     // Validation
     if (!name.trim()) {
       setError('ກະລຸນາໃສ່ຊື່ໃຫ້ຄົບຖ້ວນ');
-      return;
+      return <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={Boolean(error)}
+        onClose={() => setError('')}
+        message={error}
+        key={error}
+      />;
     }
 
     if (!isValidEmail(email)) {
       setError('ກະລຸນາໃສ່ອີເມວໃຫ້ຖືກຕ້ອງ');
-      return;
+      return <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={Boolean(error)}
+        onClose={() => setError('')}
+        message={error}
+        key={error}
+      />;
     }
 
     if (password.length < 8) {
@@ -64,7 +76,7 @@ export default function RegisterPage() {
 
   return (
     <Container maxWidth="sm">
-      <Box height="100vh" display="flex" alignItems="center" justifyContent="center">
+      <Box className='height[100vh] flex justify-center items-center' >
         <Paper elevation={3} sx={{ padding: 4, width: '100%' }}>
           <Typography variant="h5" align="center" color="primary" gutterBottom>
             Create Account
@@ -73,56 +85,59 @@ export default function RegisterPage() {
             <TextField
               label="Full Name"
               fullWidth
-              required
               margin="normal"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
                 setError('');
               }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Person color="primary" />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Person color="primary" />
+                    </InputAdornment>
+                  ),
+                }
               }}
             />
             <TextField
               label="Email"
               fullWidth
-              required
               margin="normal"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 setError('');
               }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Email color="primary" />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Email color="primary" />
+                    </InputAdornment>
+                  ),
+                }
               }}
             />
             <TextField
               label="Password"
               type="password"
               fullWidth
-              required
               margin="normal"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
                 setError('');
               }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Lock color="primary" />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Lock color="primary" />
+                    </InputAdornment>
+                  ),
+                }
               }}
               helperText="ລະຫັດຜ່ານຕ້ອງມີຢ່າງນ້ອຍ 8 ຕົວອັກສອນ"
             />

@@ -59,38 +59,40 @@ export default function LoginPage() {
             <TextField
               label="Email"
               fullWidth
-              required
               margin="normal"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 setError('');
               }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Email color="primary" />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Email color="primary" />
+                    </InputAdornment>
+                  ),
+                }
               }}
             />
             <TextField
               label="Password"
               type="password"
               fullWidth
-              required
               margin="normal"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
                 setError('');
               }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Lock color="primary" />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Lock color="primary" />
+                    </InputAdornment>
+                  ),
+                }
               }}
             />
 
@@ -119,7 +121,7 @@ export default function LoginPage() {
               color="primary"
               fullWidth
               sx={{ mt: 3 }}
-              disabled={!isFormValid} // 🔒 ปิดปุ่มหากฟอร์มไม่พร้อม
+              // disabled={!isFormValid} // 🔒 ปิดปุ่มหากฟอร์มไม่พร้อม
             >
               Login
             </Button>

@@ -52,24 +52,25 @@ export default function ForgotPasswordPage() {
           <Typography variant="h5" align="center" color="primary" gutterBottom>
             Forgot Password
           </Typography>
-        
+
           <form onSubmit={handleSubmit}>
             <TextField
               label="Email"
               fullWidth
-              required
               margin="normal"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 setError('');
               }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Email color="primary" />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Email color="primary" />
+                    </InputAdornment>
+                  ),
+                }
               }}
             />
             {error && (
