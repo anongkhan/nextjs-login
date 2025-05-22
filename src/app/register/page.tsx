@@ -76,7 +76,7 @@ export default function RegisterPage() {
 
   return (
     <Container maxWidth="sm">
-      <Box className='height[100vh] flex justify-center items-center' >
+      <Box height="100vh" display="flex" alignItems="center" justifyContent="center" >
         <Paper elevation={3} sx={{ padding: 4, width: '100%' }}>
           <Typography variant="h5" align="center" color="primary" gutterBottom>
             Create Account

@@ -121,7 +121,7 @@ export default function LoginPage() {
               color="primary"
               fullWidth
               sx={{ mt: 3 }}
-              // disabled={!isFormValid} // 🔒 ปิดปุ่มหากฟอร์มไม่พร้อม
+              disabled={!isFormValid} // 🔒 ปิดปุ่มหากฟอร์มไม่พร้อม
             >
               Login
             </Button>
