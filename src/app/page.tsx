@@ -42,9 +42,7 @@ export default function LoginPage() {
       setError('ອິເມວ ຫຼື ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ');
       return;
     }
-
-    // Login สำเร็จ
-    console.log('Login success!');
+    
     router.push('/Dashboard');
   };
 
@@ -121,7 +119,7 @@ export default function LoginPage() {
               color="primary"
               fullWidth
               sx={{ mt: 3 }}
-              disabled={!isFormValid} // 🔒 ปิดปุ่มหากฟอร์มไม่พร้อม
+              // disabled={!isFormValid} // 🔒 ปิดปุ่มหากฟอร์มไม่พร้อม
             >
               Login
             </Button>
