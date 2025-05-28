@@ -26,27 +26,15 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 export default function DashboardPage() {
   const router = useRouter();
 
-  const handleLogout = () => {
-    // ที่จริงควรลบ token/session
-    router.push('/');
-  };
 
   return (
-    <>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="static" color="primary" enableColorOnDark>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Typography variant="h6" component="div">
             🎉 Dashboard
           </Typography>
-          <Button
-            color="inherit"
-            startIcon={<LogoutIcon />}
-            onClick={handleLogout}
-            sx={{ textTransform: 'none' }}
-          >
-            Logout
-          </Button>
         </Toolbar>
       </AppBar>
 
