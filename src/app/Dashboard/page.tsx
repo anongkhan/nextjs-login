@@ -14,49 +14,62 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/Inbox';
-import StarIcon from '@mui/icons-material/Star';
-import SendIcon from '@mui/icons-material/Send';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import AllInboxIcon from '@mui/icons-material/AllInbox';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ReportIcon from '@mui/icons-material/Report';
+import UserIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ProductIcon from '@mui/icons-material/ProductionQuantityLimits';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 
 const drawerWidth = 240;
 
 export default function ClippedDrawer() {
-  const router = useRouter();
+    const router = useRouter();
 
-  const handleLogout = () => {
-    // คุณสามารถเพิ่ม logic ล้าง token หรือ session ได้ที่นี่
-    router.push('/');
-  };
+    const handleDashboard = () => {
+        router.push('Dashboard');
+    };
+    const handleSubmit = () => {
+        router.push('all-product');
+    };
+    const handleProduct = () => {
+        router.push('product-management');
+    };
+    const handleUser = () => {
+        router.push('user');
+    };
+    const handleLogout = () => {
+        router.push('/');
+    };
 
-  const primaryItems = [
-    { text: 'Inbox', icon: <InboxIcon /> },
-    { text: 'Starred', icon: <StarIcon /> },
-    { text: 'Send email', icon: <SendIcon /> },
-    { text: 'Drafts', icon: <DraftsIcon /> },
-  ];
+    const primaryItems = [
+        { text: 'Dashboard', icon: <DashboardIcon />, onclick: handleDashboard },
+        { text: 'All Products', icon: <ShoppingCartIcon />, onclick: handleSubmit },
+        { text: 'Product', icon: <ProductIcon />, onclick: handleProduct },
+        { text: 'User', icon: <UserIcon />, onclick: handleUser },
+    ];
 
-  const secondaryItems = [
-    { text: 'All mail', icon: <AllInboxIcon /> },
-    { text: 'Trash', icon: <DeleteIcon /> },
-    { text: 'Spam', icon: <ReportIcon /> },
-    { text: 'Logout', icon: <LogoutIcon />, onClick: handleLogout },
-  ];
+    const secondaryItems = [
+        { text: 'Logout', icon: <LogoutIcon />, onClick: handleLogout },
+    ];
+
+
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: 'primary.main',
+        }}
+      >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             Welcome to Dashboard
           </Typography>
-
+          
         </Toolbar>
       </AppBar>
 
@@ -65,28 +78,46 @@ export default function ClippedDrawer() {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+            backgroundColor: 'background.paper',
+          },
         }}
       >
         <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
+        <Box sx={{ overflow: 'auto', display: 'flex', flexDirection: 'column', height: '100%' }}>
           <List sx={{ mt: 2 }}>
             {primaryItems.map((item) => (
               <ListItem key={item.text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemButton
+                  onClick={item.onclick}
+                  sx={{
+                    '&:hover': {
+                      backgroundColor: 'action.hover',
+                    }
+                  }}
+                >
+                  <ListItemIcon sx={{ color: 'text.primary' }}>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.text} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
-          <Divider />
-          <List>
+          <Divider sx={{ my: 1 }} />
+          <List sx={{ mt: 'auto', mb: 2 }}>
             {secondaryItems.map((item) => (
               <ListItem key={item.text} disablePadding>
-                <ListItemButton onClick={item.onClick}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
+                <ListItemButton
+                  onClick={item.onClick}
+                  sx={{
+                    '&:hover': {
+                      backgroundColor: 'error.light',
+                    }
+                  }}
+                >
+                  <ListItemIcon sx={{ color: 'error.main' }}>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} sx={{ color: 'error.main' }} />
                 </ListItemButton>
               </ListItem>
             ))}
