@@ -50,13 +50,15 @@ export default function ProductManagementPage() {
   // Navigation handlers
   const handleLogout = () => router.push('/');
   const handleAllProducts = () => router.push('all-product');
-  const handleProduct = () => router.push('product-management');
+  const handleProductManagement = () => router.push('product-management');
   const handleUser = () => router.push('user');
   const handleDashboard = () => router.push('Dashboard');
+  const handleProduct = () => router.push('product');
 
   const primaryItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, onclick: handleDashboard },
     { text: 'All Products', icon: <ShoppingCartIcon />, onclick: handleAllProducts },
+    { text: 'Product Management', icon: <ProductIcon />, onclick: handleProductManagement },
     { text: 'Product', icon: <ProductIcon />, onclick: handleProduct },
     { text: 'User', icon: <UserIcon />, onclick: handleUser },
   ];

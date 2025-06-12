@@ -32,11 +32,14 @@ export default function ClippedDrawer() {
     const handleSubmit = () => {
         router.push('all-product');
     };
-    const handleProduct = () => {
+    const handleProductManagement = () => {
         router.push('product-management');
     };
     const handleUser = () => {
         router.push('user');
+    };
+    const handleProduct = () => {
+        router.push('product'); 
     };
     const handleLogout = () => {
         router.push('/');
@@ -45,6 +48,7 @@ export default function ClippedDrawer() {
     const primaryItems = [
         { text: 'Dashboard', icon: <DashboardIcon />, onclick: handleDashboard },
         { text: 'All Products', icon: <ShoppingCartIcon />, onclick: handleSubmit },
+        { text: 'Product Management', icon: <ProductIcon />, onclick: handleProductManagement },
         { text: 'Product', icon: <ProductIcon />, onclick: handleProduct },
         { text: 'User', icon: <UserIcon />, onclick: handleUser },
     ];
